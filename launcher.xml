@@ -11,8 +11,11 @@
         <layout type="linear" width="match" id="console_container" orientation="vertical" weight = "0">
 	        <button id="start_console" width="match" height="wrap" >Start WebConsole</button>
 	        <button id="stop_console" width="match" height="wrap" visibility="hidden">Stop WebConsole</button>
-	        <layout id="ip_address_container" type="linear" orientation="horizontal" visibility="hidden">
-	            <checkbox id="#auto_start"></checkbox>
+	        <layout id="ip_address_container" width="match" height="wrap" type="linear" orientation="horizontal" visibility="hidden">
+	            <layout orientation="horizontal" type="linear" width="match" height="wrap">
+	              <checkbox id="auto_start"></checkbox>
+	              <t>Automatically start the webconsole next time.</t>
+	            </layout>
 	            <t>IP ADDRESS:</t>
 	            <t size="20" id="ip_address"></t>
 	        </layout>

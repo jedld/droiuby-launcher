@@ -8,6 +8,7 @@ class Main < Activity
       
       @start_console_btn = V('#start_console')
       @stop_console_btn = V('#stop_console')
+      @auto_start_checkbox = V('#auto_start')
       
       @start_console_btn.on(:click) do |view|
         start_web_console  
@@ -39,7 +40,12 @@ class Main < Activity
         integrator.initiateScan
       end
             
-      start_web_console if _P.get(:auto_start)
+      if _P.get(:auto_start) == 'true'
+        @auto_start_checkbox.selected = true
+        start_web_console 
+      else
+        @auto_start_checkbox.selected = false
+      end
     
   end
   
@@ -65,11 +71,11 @@ class Main < Activity
       puts "start web console done"
       @start_console_btn.hide!
       
-      V('#auto_start').on(:click).on do |view|
+      @auto_start_checkbox.on(:click) do |view|
         if view.selected
-          _P.update_attributes!(auto_start: true)
+          _P.update_attributes!(auto_start: 'true')
         else
-          _P.update_attributes!(auto_start: false)
+          _P.update_attributes!(auto_start: 'false')
         end
       end
       
