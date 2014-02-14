@@ -1,3 +1,14 @@
+PATH
+  remote: /home/dev/workspace/droiuby-doo
+  specs:
+    droiuby (0.2.0)
+      activesupport
+      multipart-post
+      properties-ruby
+      rake
+      rubyzip (>= 1.0.0)
+      thor
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -8,13 +19,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     atomic (1.1.14)
-    droiuby (0.2.0)
-      activesupport
-      multipart-post
-      properties-ruby
-      rake
-      rubyzip (>= 1.0.0)
-      thor
     i18n (0.6.9)
     logeasy (0.0.8)
     minitest (4.7.5)
@@ -33,4 +37,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  droiuby
+  droiuby!

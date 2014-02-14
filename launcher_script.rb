@@ -6,34 +6,15 @@ class Main < Activity
         V('#app_url').text= _P.get(:app_url)
       end
       
-      start_console_btn = V('#start_console')
-      stop_console_btn = V('#stop_console')
+      @start_console_btn = V('#start_console')
+      @stop_console_btn = V('#stop_console')
       
-      start_console_btn.on(:click) do |view|
-        
-        start_console_btn.text = "Starting Webconsole ...."
-        puts "starting console"
-        start_web_console do |httpd|
-          $httpd = httpd
-          
-          puts "start web console done"
-          start_console_btn.hide!
-          
-          V('#stop_console').show!
-          
-          async.perform {
-            Java::com.droiuby.client.core.utils.Utils.getLocalIpAddress(me)
-          }.done { |result|
-            V('#ip_address_container').show!
-            V('#ip_address').text = "#{result}:4000"
-          }.start
-          
-        end
-        
+      @start_console_btn.on(:click) do |view|
+        start_web_console  
       end
       
-      stop_console_btn.on(:click) do |view|
-        stop_console_btn.text = "Shutting down console ...."
+      @stop_console_btn.on(:click) do |view|
+        @stop_console_btn.text = "Shutting down console ...."
         $httpd.shutdownConsole()
       end
       
@@ -50,7 +31,6 @@ class Main < Activity
           #store in prefs to be auto launched next time
           _P.update_attributes!(app_url: url_str)
           
-          
           launch url_str
       end
       
@@ -58,6 +38,8 @@ class Main < Activity
         integrator = Java::com.droiuby.client.utils.intents.IntentIntegrator.new(me)
         integrator.initiateScan
       end
+            
+      start_web_console if _P.get(:auto_start)
     
   end
   
@@ -67,5 +49,39 @@ class Main < Activity
     if scanResult != nil
       app_url.text= scanResult.getContents()
     end
+  end
+  
+  private
+  
+  def start_web_console
+    
+    @start_console_btn.text = "Starting Webconsole ...."
+    
+    puts "starting console"
+    
+    Droiuby::Utils.start_web_console do |httpd|
+      $httpd = httpd
+      
+      puts "start web console done"
+      @start_console_btn.hide!
+      
+      V('#auto_start').on(:click).on do |view|
+        if view.selected
+          _P.update_attributes!(auto_start: true)
+        else
+          _P.update_attributes!(auto_start: false)
+        end
+      end
+      
+      @stop_console_btn.show!
+      
+      async.perform {
+        Java::com.droiuby.client.core.utils.Utils.getLocalIpAddress(me)
+      }.done { |result|
+        V('#ip_address_container').show!
+        V('#ip_address').text = "#{result}:4000"
+      }.start
+      
+    end  
   end
 end
