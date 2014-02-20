@@ -48,10 +48,10 @@ class Main < Activity
       end
             
       if _P.get(:auto_start) == 'true'
-        @auto_start_checkbox.selected = true
+        @auto_start_checkbox.checked = true
         start_web_console 
       else
-        @auto_start_checkbox.selected = false
+        @auto_start_checkbox.checked = false
       end
     
   end
