@@ -1,10 +1,10 @@
-java_import "android.content.pm.ActivityInfos"
+java_import "android.content.pm.ActivityInfo"
 
 #ruby script that handles the behavior of the launcher
 class Main < Activity
 
   def before_content_render
-    _current_activity.setRequestedOrientation(ActivityInfo::SCREEN_ORIENTATION_LANDSCAPE);
+    _current_activity.setRequestedOrientation(ActivityInfo::SCREEN_ORIENTATION_PORTRAIT);
   end
 
   def on_create
@@ -78,7 +78,7 @@ class Main < Activity
       puts "start web console done"
       @start_console_btn.hide!
       
-      @auto_start_checkbox.on(:checked_changed) do |view|
+      @auto_start_checkbox.on(:checked_change) do |view|
         if view.selected
           _P.update_attributes!(auto_start: 'true')
         else
