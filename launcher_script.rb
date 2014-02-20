@@ -4,7 +4,7 @@ java_import "android.content.pm.ActivityInfos"
 class Main < Activity
 
   def before_content_render
-    _current_activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    _current_activity.setRequestedOrientation(ActivityInfo::SCREEN_ORIENTATION_LANDSCAPE);
   end
 
   def on_create
