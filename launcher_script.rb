@@ -3,9 +3,9 @@ java_import "android.content.pm.ActivityInfo"
 #ruby script that handles the behavior of the launcher
 class Main < Activity
 
-  def before_content_render
-    _current_activity.setRequestedOrientation(ActivityInfo::SCREEN_ORIENTATION_PORTRAIT);
-  end
+  portrait_mode_only
+
+  no_action_bar
 
   def on_create
     
