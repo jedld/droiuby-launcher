@@ -79,11 +79,7 @@ class Main < Activity
       @start_console_btn.hide!
       
       @auto_start_checkbox.on(:checked_change) do |view|
-        if view.checked?
-          _P.update_attributes!(auto_start: 'true')
-        else
-          _P.update_attributes!(auto_start: 'false')
-        end
+        _P.update_attributes!(auto_start: view.checked? ? 'true' : 'false')
       end
       
       @stop_console_btn.show!
